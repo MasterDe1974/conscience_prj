@@ -11,12 +11,14 @@
             "id": "d34ad90d788d44c3",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.11.4"
+                "file": "Тезисы.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "примечания к выпуску 1.11.4"
+              "icon": "lucide-file",
+              "title": "Тезисы"
             }
           },
           {
@@ -31,8 +33,7 @@
               "title": "примечания к выпуску 1.11.4"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -205,6 +206,8 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1cb2622af0b4c35e",
-  "lastOpenFiles": []
+  "active": "d34ad90d788d44c3",
+  "lastOpenFiles": [
+    "Тезисы.md"
+  ]
 }
