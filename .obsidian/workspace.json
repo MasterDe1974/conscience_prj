@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Тезисы.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Тезисы"
+              "title": "README"
             }
           },
           {
@@ -27,7 +27,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conscience_prj/README.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
@@ -222,10 +222,10 @@
   },
   "active": "d34ad90d788d44c3",
   "lastOpenFiles": [
-    "conscience_prj/README.md",
-    "README.md",
     "Тезисы.md",
+    "README.md",
     "conscience_prj/Тезисы.md",
+    "conscience_prj/README.md",
     "conscience_prj/conscience_prj"
   ]
 }
