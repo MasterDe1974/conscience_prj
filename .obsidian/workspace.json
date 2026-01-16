@@ -25,14 +25,14 @@
             "id": "b892dee7acf46536",
             "type": "leaf",
             "state": {
-              "type": "split-diff-view",
+              "type": "markdown",
               "state": {
-                "aFile": ".obsidian/workspace.json",
-                "bFile": ".obsidian/workspace.json",
-                "aRef": ""
+                "file": "conscience_prj/README.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "diff",
-              "title": "Diff: workspace.json  (Working Tree)"
+              "icon": "lucide-file",
+              "title": "README"
             }
           },
           {
@@ -47,8 +47,7 @@
               "title": "примечания к выпуску 1.11.4"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -221,8 +220,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b892dee7acf46536",
+  "active": "d34ad90d788d44c3",
   "lastOpenFiles": [
-    "Тезисы.md"
+    "conscience_prj/README.md",
+    "README.md",
+    "Тезисы.md",
+    "conscience_prj/Тезисы.md",
+    "conscience_prj/conscience_prj"
   ]
 }
