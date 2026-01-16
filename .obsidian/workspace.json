@@ -13,12 +13,38 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Тезисы.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Тезисы"
+            }
+          },
+          {
+            "id": "a5ade433491f9126",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "примечания к выпуску 1.11.4"
+            }
+          },
+          {
+            "id": "084dd16a26339c4c",
+            "type": "leaf",
+            "state": {
+              "type": "split-diff-view",
+              "state": {
+                "aFile": ".obsidian/workspace.json",
+                "bFile": ".obsidian/workspace.json",
+                "aRef": ""
+              },
+              "icon": "diff",
+              "title": "Diff: workspace.json  (Working Tree)"
             }
           },
           {
@@ -47,7 +73,8 @@
               "title": "примечания к выпуску 1.11.4"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -220,10 +247,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d34ad90d788d44c3",
+  "active": "084dd16a26339c4c",
   "lastOpenFiles": [
-    "Тезисы.md",
     "README.md",
+    "Тезисы.md",
     "conscience_prj/Тезисы.md",
     "conscience_prj/README.md",
     "conscience_prj/conscience_prj"
