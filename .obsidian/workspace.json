@@ -36,6 +36,18 @@
             }
           },
           {
+            "id": "780385d93e3db3b7",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.5"
+              },
+              "icon": "lucide-book-up",
+              "title": "примечания к выпуску 1.11.5"
+            }
+          },
+          {
             "id": "1cb2622af0b4c35e",
             "type": "leaf",
             "state": {
@@ -48,7 +60,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -221,7 +233,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b892dee7acf46536",
+  "active": "780385d93e3db3b7",
   "lastOpenFiles": [
     "README.md",
     "Тезисы.md",
