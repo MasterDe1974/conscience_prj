@@ -47,7 +47,8 @@
               "title": "примечания к выпуску 1.11.4"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -220,7 +221,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d34ad90d788d44c3",
+  "active": "b892dee7acf46536",
   "lastOpenFiles": [
     "README.md",
     "Тезисы.md",
