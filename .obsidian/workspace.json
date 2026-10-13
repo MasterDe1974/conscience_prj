@@ -156,6 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "План.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -196,11 +197,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d34ad90d788d44c3",
+  "active": "4dde25972235c289",
   "lastOpenFiles": [
     "Тезисы.md",
-    "План.md",
     "Сознание как согласующая система.md",
+    "План.md",
     "README.md",
     "Значимочти.drawio.svg",
     "Без названия 1.md",
