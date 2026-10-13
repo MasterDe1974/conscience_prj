@@ -5,26 +5,30 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
 var __commonJS = (cb, mod) => function __require() {
-  return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __export = (target, all) => {
-  __markAsModule(target);
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __reExport = (target, module2, desc) => {
-  if (module2 && typeof module2 === "object" || typeof module2 === "function") {
-    for (let key of __getOwnPropNames(module2))
-      if (!__hasOwnProp.call(target, key) && key !== "default")
-        __defProp(target, key, { get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable });
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
   }
-  return target;
+  return to;
 };
-var __toModule = (module2) => {
-  return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
-};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __async = (__this, __arguments, generator) => {
   return new Promise((resolve, reject) => {
     var fulfilled = (value) => {
@@ -879,6 +883,7 @@ var require_int = __commonJS({
         decimal: function(obj) {
           return obj.toString(10);
         },
+        /* eslint-disable max-len */
         hexadecimal: function(obj) {
           return obj >= 0 ? "0x" + obj.toString(16).toUpperCase() : "-0x" + obj.toString(16).toUpperCase().slice(1);
         }
@@ -900,11 +905,16 @@ var require_float = __commonJS({
     "use strict";
     var common = require_common();
     var Type = require_type();
-    var YAML_FLOAT_PATTERN = new RegExp("^(?:[-+]?(?:0|[1-9][0-9_]*)(?:\\.[0-9_]*)?(?:[eE][-+]?[0-9]+)?|\\.[0-9_]+(?:[eE][-+]?[0-9]+)?|[-+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[-+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))$");
+    var YAML_FLOAT_PATTERN = new RegExp(
+      // 2.5e4, 2.5 and integers
+      "^(?:[-+]?(?:0|[1-9][0-9_]*)(?:\\.[0-9_]*)?(?:[eE][-+]?[0-9]+)?|\\.[0-9_]+(?:[eE][-+]?[0-9]+)?|[-+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[-+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))$"
+    );
     function resolveYamlFloat(data) {
       if (data === null)
         return false;
-      if (!YAML_FLOAT_PATTERN.test(data) || data[data.length - 1] === "_") {
+      if (!YAML_FLOAT_PATTERN.test(data) || // Quick hack to not allow integers end with `_`
+      // Probably should update regexp & check speed
+      data[data.length - 1] === "_") {
         return false;
       }
       return true;
@@ -1022,8 +1032,12 @@ var require_timestamp = __commonJS({
   "node_modules/gray-matter/node_modules/js-yaml/lib/js-yaml/type/timestamp.js"(exports2, module2) {
     "use strict";
     var Type = require_type();
-    var YAML_DATE_REGEXP = new RegExp("^([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])$");
-    var YAML_TIMESTAMP_REGEXP = new RegExp("^([0-9][0-9][0-9][0-9])-([0-9][0-9]?)-([0-9][0-9]?)(?:[Tt]|[ \\t]+)([0-9][0-9]?):([0-9][0-9]):([0-9][0-9])(?:\\.([0-9]*))?(?:[ \\t]*(Z|([-+])([0-9][0-9]?)(?::([0-9][0-9]))?))?$");
+    var YAML_DATE_REGEXP = new RegExp(
+      "^([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])$"
+    );
+    var YAML_TIMESTAMP_REGEXP = new RegExp(
+      "^([0-9][0-9][0-9][0-9])-([0-9][0-9]?)-([0-9][0-9]?)(?:[Tt]|[ \\t]+)([0-9][0-9]?):([0-9][0-9]):([0-9][0-9])(?:\\.([0-9]*))?(?:[ \\t]*(Z|([-+])([0-9][0-9]?)(?::([0-9][0-9]))?))?$"
+    );
     function resolveYamlTimestamp(data) {
       if (data === null)
         return false;
@@ -1552,13 +1566,28 @@ var require_loader = __commonJS({
       return -1;
     }
     function simpleEscapeSequence(c) {
-      return c === 48 ? "\0" : c === 97 ? "\x07" : c === 98 ? "\b" : c === 116 ? "	" : c === 9 ? "	" : c === 110 ? "\n" : c === 118 ? "\v" : c === 102 ? "\f" : c === 114 ? "\r" : c === 101 ? "" : c === 32 ? " " : c === 34 ? '"' : c === 47 ? "/" : c === 92 ? "\\" : c === 78 ? "\x85" : c === 95 ? "\xA0" : c === 76 ? "\u2028" : c === 80 ? "\u2029" : "";
+      return c === 48 ? "\0" : c === 97 ? "\x07" : c === 98 ? "\b" : c === 116 ? "	" : c === 9 ? "	" : c === 110 ? "\n" : c === 118 ? "\v" : c === 102 ? "\f" : c === 114 ? "\r" : c === 101 ? "\x1B" : c === 32 ? " " : c === 34 ? '"' : c === 47 ? "/" : c === 92 ? "\\" : c === 78 ? "\x85" : c === 95 ? "\xA0" : c === 76 ? "\u2028" : c === 80 ? "\u2029" : "";
     }
     function charFromCodepoint(c) {
       if (c <= 65535) {
         return String.fromCharCode(c);
       }
-      return String.fromCharCode((c - 65536 >> 10) + 55296, (c - 65536 & 1023) + 56320);
+      return String.fromCharCode(
+        (c - 65536 >> 10) + 55296,
+        (c - 65536 & 1023) + 56320
+      );
+    }
+    function setProperty(object, key, value) {
+      if (key === "__proto__") {
+        Object.defineProperty(object, key, {
+          configurable: true,
+          enumerable: true,
+          writable: true,
+          value
+        });
+      } else {
+        object[key] = value;
+      }
     }
     var simpleEscapeCheck = new Array(256);
     var simpleEscapeMap = new Array(256);
@@ -1585,7 +1614,10 @@ var require_loader = __commonJS({
       this.documents = [];
     }
     function generateError(state, message) {
-      return new YAMLException(message, new Mark(state.filename, state.input, state.position, state.line, state.position - state.lineStart));
+      return new YAMLException(
+        message,
+        new Mark(state.filename, state.input, state.position, state.line, state.position - state.lineStart)
+      );
     }
     function throwError(state, message) {
       throw generateError(state, message);
@@ -1664,7 +1696,7 @@ var require_loader = __commonJS({
       for (index = 0, quantity = sourceKeys.length; index < quantity; index += 1) {
         key = sourceKeys[index];
         if (!_hasOwnProperty.call(destination, key)) {
-          destination[key] = source[key];
+          setProperty(destination, key, source[key]);
           overridableKeys[key] = true;
         }
       }
@@ -1703,7 +1735,7 @@ var require_loader = __commonJS({
           state.position = startPos || state.position;
           throwError(state, "duplicated mapping key");
         }
-        _result[keyNode] = valueNode;
+        setProperty(_result, keyNode, valueNode);
         delete overridableKeys[keyNode];
       }
       return _result;
@@ -2792,7 +2824,8 @@ var require_dumper = __commonJS({
           if (char === CHAR_LINE_FEED) {
             hasLineBreak = true;
             if (shouldTrackWidth) {
-              hasFoldableLine = hasFoldableLine || i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
+              hasFoldableLine = hasFoldableLine || // Foldable line = too long, and not more-indented.
+              i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
               previousLineBreak = i;
             }
           } else if (!isPrintable(char)) {
@@ -3592,29 +3625,31 @@ var require_package = __commonJS({
   "package.json"(exports2, module2) {
     module2.exports = {
       name: "obsidian-telegraph-publish",
-      version: "1.2.3",
+      version: "1.2.4",
       main: "main.js",
       scripts: {
         start: "node esbuild.config.mjs",
         clean: "rm -rf build",
-        build: "tsc -noEmit -skipLibCheck && BUILD_ENV=production node esbuild.config.mjs && cp manifest.json build",
+        build: "tsc --noEmit --skipLibCheck && cross-env BUILD_ENV=production node esbuild.config.mjs && copyfiles manifest.json build",
         version: "node version-bump.mjs && git add manifest.json versions.json",
-        release: "yarn build && gh release create ${npm_package_version} build/*"
+        release: "npm run build && gh release create ${npm_package_version} build/*"
       },
       keywords: [],
       author: "Reorx",
       license: "MIT",
       devDependencies: {
-        "@types/node": "^16.11.6",
-        "@types/superagent": "^4.1.15",
-        "@typescript-eslint/eslint-plugin": "^5.17.0",
-        "@typescript-eslint/parser": "^5.17.0",
-        "builtin-modules": "^3.2.0",
-        esbuild: "0.13.12",
-        eslint: "^8.12.0",
-        obsidian: "^0.13.26",
-        tslib: "2.3.1",
-        typescript: "4.4.4"
+        "@types/node": "^18.14.1",
+        "@types/superagent": "^4.1.16",
+        "@typescript-eslint/eslint-plugin": "^5.53.0",
+        "@typescript-eslint/parser": "^5.53.0",
+        "builtin-modules": "^3.3.0",
+        copyfiles: "^2.4.1",
+        "cross-env": "^10.1.0",
+        esbuild: "0.17.10",
+        eslint: "^8.35.0",
+        obsidian: "^1.1.1",
+        tslib: "2.5.0",
+        typescript: "4.9.5"
       },
       dependencies: {
         "gray-matter": "^4.0.3"
@@ -3624,11 +3659,13 @@ var require_package = __commonJS({
 });
 
 // main.ts
-__export(exports, {
+var main_exports = {};
+__export(main_exports, {
   default: () => TelegraphPublishPlugin
 });
-var import_gray_matter = __toModule(require_gray_matter());
-var import_obsidian2 = __toModule(require("obsidian"));
+module.exports = __toCommonJS(main_exports);
+var import_gray_matter = __toESM(require_gray_matter());
+var import_obsidian2 = require("obsidian");
 
 // updateKeyInFrontMatter.ts
 var updateKeyInFrontMatter = (content, key, newValue) => {
@@ -3640,7 +3677,9 @@ ${content}`;
   }
   const [start, maybeFrontMatter, ...rest] = content.split(new RegExp(/---\n/));
   const oldMatterSplitted = maybeFrontMatter.split("\n").map((item) => item.split(/: /, 2));
-  const maybeKeyIndex = oldMatterSplitted.findIndex((it) => it[0] === key && it.length === 2);
+  const maybeKeyIndex = oldMatterSplitted.findIndex(
+    (it) => it[0] === key && it.length === 2
+  );
   if (maybeKeyIndex >= 0) {
     oldMatterSplitted[maybeKeyIndex][1] = newValue;
   } else {
@@ -3651,12 +3690,11 @@ ${content}`;
   const newMatter = oldMatterSplitted.map((item) => {
     return item.join(": ");
   }).join("\n");
-  return [start, newMatter, ...rest].join(`---
-`);
+  return [start, newMatter, ...rest].join("---\n");
 };
 
 // telegraph/index.ts
-var import_obsidian = __toModule(require("obsidian"));
+var import_obsidian = require("obsidian");
 var constants = {
   API_URL: "https://api.telegra.ph/"
 };
@@ -3664,6 +3702,7 @@ var TelegraphClient = class {
   constructor(accessToken) {
     this.accessToken = accessToken;
   }
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   request(_0, _1) {
     return __async(this, arguments, function* (method, path, data = {}) {
       const req = {
@@ -3685,6 +3724,7 @@ var TelegraphClient = class {
       return resData.result;
     });
   }
+  /* eslint-enable @typescript-eslint/no-explicit-any */
   createAccount(shortName, authorName) {
     return __async(this, null, function* () {
       const data = yield this.request("POST", "createAccount", {
@@ -3761,6 +3801,7 @@ var availableTags = [
   "u",
   "ul",
   "video",
+  // additional tags
   "table"
 ];
 var availableInlineTags = [
@@ -3777,6 +3818,7 @@ var availableInlineTags = [
   "u"
 ];
 var elementToNodeElement = (el) => {
+  var _a;
   const tag = el.tagName.toLowerCase();
   const nodeElement = {
     tag
@@ -3807,12 +3849,40 @@ var elementToNodeElement = (el) => {
   if (Object.keys(attrs).length > 0) {
     nodeElement.attrs = attrs;
   }
+  if (nodeElement.tag === "img") {
+    const src = el.getAttribute("src") || el.src;
+    if (src && src.length > 0) {
+      nodeElement.attrs = (_a = nodeElement.attrs) != null ? _a : {};
+      nodeElement.attrs.src = src;
+    }
+  }
   return [nodeElement, tag];
 };
 function trimLineBreak(s) {
   return s.replace(/^\n+|\n+$/g, "");
 }
 function elementToContentNodes(el, unwrapBlock = null, parentTag = null) {
+  if (el instanceof HTMLElement) {
+    const tag2 = el.tagName.toLowerCase();
+    if (tag2 === "div" && el.classList.contains("callout") && el.getAttribute("data-callout") === "quote") {
+      const contentEl = el.querySelector(":scope > .callout-content");
+      if (!contentEl) {
+        const nodes = [];
+        for (const child of el.childNodes) {
+          nodes.push(...elementToContentNodes(child, true, parentTag));
+        }
+        return nodes;
+      }
+      const children2 = [];
+      for (const child of contentEl.childNodes) {
+        children2.push(...elementToContentNodes(child, true, null));
+      }
+      return [{
+        tag: "aside",
+        children: children2
+      }];
+    }
+  }
   if (el instanceof Text) {
     const text = el.data;
     if (text.trim().length === 0) {
@@ -3833,6 +3903,44 @@ function elementToContentNodes(el, unwrapBlock = null, parentTag = null) {
     return [];
   if (el.hasClass("frontmatter-container"))
     return [];
+  if (el.tagName.toLowerCase() === "p") {
+    const childNodes = Array.from(el.childNodes);
+    const imgEl = el.querySelector(":scope > img");
+    const emEl = el.querySelector(":scope > em");
+    if (imgEl && emEl) {
+      const meaningful = childNodes.filter((n) => {
+        var _a;
+        if (n.nodeType === Node.TEXT_NODE) {
+          return ((_a = n.textContent) != null ? _a : "").trim().length > 0;
+        }
+        if (n.nodeType === Node.ELEMENT_NODE) {
+          const t = n.tagName.toLowerCase();
+          return t !== "img" && t !== "br" && t !== "em";
+        }
+        return true;
+      });
+      if (meaningful.length === 0) {
+        const src = imgEl.getAttribute("src") || imgEl.src;
+        const imgNodes = src ? [{ tag: "img", attrs: { src } }] : [];
+        const captionChildren = [];
+        for (const c of Array.from(emEl.childNodes)) {
+          captionChildren.push(...elementToContentNodes(c, true, null));
+        }
+        if (captionChildren.length > 0) {
+          return [{
+            tag: "figure",
+            children: [
+              ...imgNodes,
+              {
+                tag: "figcaption",
+                children: captionChildren
+              }
+            ]
+          }];
+        }
+      }
+    }
+  }
   const [nodeElement, tag] = elementToNodeElement(el);
   let shouldUnwrap = !nodeElement;
   if (nodeElement) {
@@ -3864,9 +3972,6 @@ function elementToContentNodes(el, unwrapBlock = null, parentTag = null) {
         return [];
       break;
     case "a":
-      if (el.hasClass("internal-link")) {
-        nodeElement.attrs.href = "#";
-      }
       break;
   }
   const children = [];
@@ -3915,12 +4020,6 @@ var DEFAULT_SETTINGS = {
   accessToken: "",
   username: "obsidian"
 };
-var Action;
-(function(Action2) {
-  Action2["create"] = "create";
-  Action2["update"] = "update";
-  Action2["clear"] = "clear";
-})(Action || (Action = {}));
 var DEBUG = false;
 function debugLog(...args) {
   if (DEBUG) {
@@ -3981,6 +4080,48 @@ var TelegraphPublishPlugin = class extends import_obsidian2.Plugin {
       return [content, data[FRONTMATTER_KEY.telegraph_page_path]];
     });
   }
+  /**
+   * Convert Obsidian internal links (e.g. [[Some note]]) to Telegraph URLs if the
+   * target note has `telegraph_page_url` in its frontmatter.
+   *
+   * Notes:
+   * - We only touch links that point to *other* files.
+   * - Links to headings inside the current file (e.g. [[#Heading]]) are left as-is.
+   * - If the target note doesn't have `telegraph_page_url`, we fall back to '#'
+   */
+  rewriteInternalLinks(containerEl, sourceFile) {
+    return __async(this, null, function* () {
+      var _a, _b, _c, _d;
+      const linkEls = Array.from(containerEl.querySelectorAll("a.internal-link"));
+      if (linkEls.length === 0)
+        return;
+      const urlByPath = /* @__PURE__ */ new Map();
+      for (const a of linkEls) {
+        const raw = ((_b = (_a = a.getAttribute("data-href")) != null ? _a : a.getAttribute("href")) != null ? _b : "").trim();
+        if (!raw)
+          continue;
+        if (raw.startsWith("#"))
+          continue;
+        const linkPath = raw.split("#")[0].trim();
+        if (!linkPath)
+          continue;
+        const dest = this.app.metadataCache.getFirstLinkpathDest(linkPath, sourceFile.path);
+        if (!dest) {
+          a.setAttribute("href", "#");
+          continue;
+        }
+        let telegraphUrl;
+        if (urlByPath.has(dest.path)) {
+          telegraphUrl = urlByPath.get(dest.path);
+        } else {
+          const cache = this.app.metadataCache.getFileCache(dest);
+          telegraphUrl = (_d = (_c = cache == null ? void 0 : cache.frontmatter) == null ? void 0 : _c[FRONTMATTER_KEY.telegraph_page_url]) != null ? _d : null;
+          urlByPath.set(dest.path, telegraphUrl);
+        }
+        a.setAttribute("href", telegraphUrl != null ? telegraphUrl : "#");
+      }
+    });
+  }
   ensureAccessToken() {
     if (!this.settings.accessToken) {
       new PublishModal(this).invalidOperation("Please set access token or create new account in settings").open();
@@ -3998,7 +4139,7 @@ var TelegraphPublishPlugin = class extends import_obsidian2.Plugin {
         return;
       }
       const [, pagePath] = yield this.getActiveFileContent(view);
-      new PublishModal(this).confirm(pagePath ? Action.update : Action.create, view.file.basename, this.publishActiveFileSafe.bind(this)).open();
+      new PublishModal(this).confirm(pagePath ? "update" /* update */ : "create" /* create */, view.file.basename, this.publishActiveFileSafe.bind(this)).open();
     });
   }
   confirmClearPublished() {
@@ -4015,7 +4156,7 @@ var TelegraphPublishPlugin = class extends import_obsidian2.Plugin {
         new PublishModal(this).invalidOperation("This file has not been published yet").open();
         return;
       }
-      new PublishModal(this).confirm(Action.clear, view.file.basename, this.clearPublished.bind(this)).open();
+      new PublishModal(this).confirm("clear" /* clear */, view.file.basename, this.clearPublished.bind(this)).open();
     });
   }
   publishActiveFileSafe() {
@@ -4042,9 +4183,8 @@ var TelegraphPublishPlugin = class extends import_obsidian2.Plugin {
         throw new Error("Cannot get file from active markdown view");
       }
       context.file = file;
-      let contentEl;
       const markdown = yield this.app.vault.cachedRead(file);
-      contentEl = view.containerEl.createDiv({
+      const contentEl = view.containerEl.createDiv({
         cls: "tmp-markdown-preview",
         attr: {
           style: "display: none;"
@@ -4055,20 +4195,22 @@ var TelegraphPublishPlugin = class extends import_obsidian2.Plugin {
         contentEl.remove();
       });
       yield import_obsidian2.MarkdownRenderer.renderMarkdown(markdown, contentEl, "", null);
+      yield this.rewriteInternalLinks(contentEl, file);
       const nodes = elementToContentNodes(contentEl);
       debugLog("nodes", nodes);
       const [content, pagePath] = yield this.getActiveFileContent(view);
       let page, action;
       if (pagePath) {
-        action = Action.update;
+        action = "update" /* update */;
         context.action = action;
         page = yield this.getClient().editPage({
           path: pagePath,
           title: file.basename,
+          // title: '',
           content: nodes
         });
       } else {
-        action = Action.create;
+        action = "create" /* create */;
         context.action = action;
         page = yield this.getClient().createPage({
           title: file.basename,
@@ -4093,14 +4235,15 @@ var TelegraphPublishPlugin = class extends import_obsidian2.Plugin {
         page = yield this.getClient().editPage({
           path: pagePath,
           title: file.basename,
+          // title: '',
           content: ["Deleted"]
         });
       } catch (err) {
-        new PublishModal(this).error(Action.clear, err, file.basename).open();
+        new PublishModal(this).error("clear" /* clear */, err, file.basename).open();
         throw err;
       }
       debugLog("page", page.url, page);
-      new PublishModal(this).success(Action.clear, file.basename, page.url).open();
+      new PublishModal(this).success("clear" /* clear */, file.basename, page.url).open();
     });
   }
   onunload() {
@@ -4130,13 +4273,13 @@ var PublishModal = class extends import_obsidian2.Modal {
     const { contentEl, titleEl } = this;
     titleEl.innerText = `Confirm publish - ${action}`;
     switch (action) {
-      case Action.create:
-      case Action.update:
+      case "create" /* create */:
+      case "update" /* update */:
         contentEl.createEl("p", {
           text: `Are you sure you want to publish "${fileTitle}" to Telegraph?`
         });
         break;
-      case Action.clear:
+      case "clear" /* clear */:
         contentEl.createEl("p", {
           text: `Are you sure you want to clear published content of "${fileTitle}" on Telegraph?`
         });
@@ -4161,8 +4304,8 @@ var PublishModal = class extends import_obsidian2.Modal {
     const { contentEl, titleEl } = this;
     titleEl.innerText = `Publish success - ${action}`;
     switch (action) {
-      case Action.create:
-      case Action.update:
+      case "create" /* create */:
+      case "update" /* update */:
         contentEl.createEl("p", {
           text: `Your article has been published (${action}) to Telegraph.`
         });
@@ -4183,7 +4326,7 @@ var PublishModal = class extends import_obsidian2.Modal {
           });
         });
         break;
-      case Action.clear:
+      case "clear" /* clear */:
         contentEl.createEl("p", {
           text: "Your published article has been cleared."
         });
@@ -4268,15 +4411,19 @@ var SettingTab = class extends import_obsidian2.PluginSettingTab {
     containerEl.empty();
     containerEl.addClass("telegraph-publish-setting");
     containerEl.createEl("h2", { text: "Telegraph Account" });
-    new import_obsidian2.Setting(containerEl).setName("Username").setDesc("The username for creating Telegraph account").addText((text) => text.setValue(this.plugin.settings.username).onChange((value) => __async(this, null, function* () {
-      plugin.settings.username = value;
-      yield plugin.saveSettings();
-    })));
-    new import_obsidian2.Setting(containerEl).setName("Access token").setDesc('Telegraph access token. You can also leave it empty and click "Create new account"').addText((text) => text.setValue(this.plugin.settings.accessToken).onChange((value) => __async(this, null, function* () {
-      plugin.settings.accessToken = value;
-      yield plugin.saveSettings();
-      this.renderAccountInfo();
-    })));
+    new import_obsidian2.Setting(containerEl).setName("Username").setDesc("The username for creating Telegraph account").addText((text) => text.setValue(this.plugin.settings.username).onChange(
+      (value) => __async(this, null, function* () {
+        plugin.settings.username = value;
+        yield plugin.saveSettings();
+      })
+    ));
+    new import_obsidian2.Setting(containerEl).setName("Access token").setDesc('Telegraph access token. You can also leave it empty and click "Create new account"').addText((text) => text.setValue(this.plugin.settings.accessToken).onChange(
+      (value) => __async(this, null, function* () {
+        plugin.settings.accessToken = value;
+        yield plugin.saveSettings();
+        this.renderAccountInfo();
+      })
+    ));
     new import_obsidian2.Setting(containerEl).setName("Create new account").setDesc("When new account is created, access token will be replaced with the new one, please backup your old access token before creating new account").addButton((button) => {
       button.setButtonText("Create new account").onClick(() => __async(this, null, function* () {
         let account;
@@ -4303,17 +4450,23 @@ var SettingTab = class extends import_obsidian2.PluginSettingTab {
     this.renderAccountInfo();
   }
 };
-/*!
- * is-extendable <https://github.com/jonschlinkert/is-extendable>
- *
- * Copyright (c) 2015, Jon Schlinkert.
- * Licensed under the MIT License.
- */
-/*!
- * strip-bom-string <https://github.com/jonschlinkert/strip-bom-string>
- *
- * Copyright (c) 2015, 2017, Jon Schlinkert.
- * Released under the MIT License.
- */
+/*! Bundled license information:
+
+is-extendable/index.js:
+  (*!
+   * is-extendable <https://github.com/jonschlinkert/is-extendable>
+   *
+   * Copyright (c) 2015, Jon Schlinkert.
+   * Licensed under the MIT License.
+   *)
+
+strip-bom-string/index.js:
+  (*!
+   * strip-bom-string <https://github.com/jonschlinkert/strip-bom-string>
+   *
+   * Copyright (c) 2015, 2017, Jon Schlinkert.
+   * Released under the MIT License.
+   *)
+*/
 
 /* nosourcemap */

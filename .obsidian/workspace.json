@@ -20,47 +20,8 @@
               "icon": "lucide-file",
               "title": "Тезисы"
             }
-          },
-          {
-            "id": "b892dee7acf46536",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
-            }
-          },
-          {
-            "id": "780385d93e3db3b7",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.11.5"
-              },
-              "icon": "lucide-book-up",
-              "title": "примечания к выпуску 1.11.5"
-            }
-          },
-          {
-            "id": "1cb2622af0b4c35e",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.11.4"
-              },
-              "icon": "lucide-book-up",
-              "title": "примечания к выпуску 1.11.4"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -80,7 +41,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Файловый менеджер"
@@ -117,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 509.5
   },
   "right": {
     "id": "9da84a4e5837ce6d",
@@ -216,7 +179,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 895.5
+    "width": 638.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -233,10 +196,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "780385d93e3db3b7",
+  "active": "4dde25972235c289",
   "lastOpenFiles": [
+    "Сознание как согласующая система.md",
     "README.md",
     "Тезисы.md",
+    "Значимочти.drawio.svg",
+    "Без названия 1.md",
+    "Значимочти.drawio",
+    "Без названия.md",
     "conscience_prj/Тезисы.md",
     "conscience_prj/README.md",
     "conscience_prj/conscience_prj"
